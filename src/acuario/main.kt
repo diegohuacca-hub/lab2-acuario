@@ -1,14 +1,37 @@
 package acuario
 
-fun construirAcuario() {
+fun ejecutarSistema() {
 
-    val miAcuario = Acuario(ancho = 25, largo = 25, alto = 40)
-    miAcuario.imprimirTamano()
+    println("=== TANQUES ===")
 
-    val miTorre = TanqueTorre(diametro = 25, alto = 40)
-    miTorre.imprimirTamano()
+    val tanque1 = Tanque()
+    tanque1.mostrarInfo()
+
+    val tanque2 = TanqueCircular(alto = 50, diametro = 30)
+    tanque2.mostrarInfo()
+
+    println("\n=== MASCOTAS (POLIMORFISMO) ===")
+
+    // 🔥 POLIMORFISMO
+    val mascotas: List<MascotaAcuatica> = listOf(PezBeta(), PezDorado())
+
+    for (mascota in mascotas) {
+        println("${mascota.nombre} es de color ${mascota.color}")
+
+        // usamos la interfaz
+        if (mascota is AccionMascota) {
+            mascota.alimentarse()
+        }
+
+        println("--------------------")
+    }
+
+    println("\n=== CAMBIO DE VOLUMEN ===")
+
+    tanque1.volumen = 100
+    tanque1.mostrarInfo()
 }
 
 fun main() {
-    construirAcuario()
+    ejecutarSistema()
 }
